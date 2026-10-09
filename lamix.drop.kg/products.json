@@ -1,0 +1,10 @@
+[
+    {
+        "brand": "Nike",
+        "title": "Худи",
+        "price": "2500",
+        "sizes": "S, M, L, XL.",
+        "stock": "5",
+        "photo": "https://api.telegram.org/file/bot8633295438:AAEoWTSDKXBgQUychgfDodtUWvKPMnVs7MI/photos/file_0.jpg"
+    }
+]

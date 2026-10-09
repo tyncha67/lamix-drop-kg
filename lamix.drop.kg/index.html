@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamix.Drop.kg - Магазин одежды</title>
+    
+    <!-- SEO-теги для Google и других поисковиков -->
+    <meta name="description" content="Lamix.Drop.kg - магазин стильной одежды и брендовых вещей в Кыргызстане. Быстрый заказ через WhatsApp и Telegram!">
+    <meta name="keywords" content="lamix drop, ламикс дроп, одежда бишкек, купить худи кыргызстан, lamix-drop.kg">
+    <meta name="author" content="Lamix Drop">
+
+    <link rel="stylesheet" href="style.css">
+    <!-- Подключаем иконки FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo-img">
+                <img src="./WhatsApp Image 2026-10-09 at 15.45.55.jpeg" alt="Lamix Drop">
+                <span>LAMIX.DROP</span>
+            </a>
+            <nav class="nav">
+                <a href="#catalog">Каталог</a>
+                <a href="#contacts">Контакты</a>
+            </nav>
+            <div class="header-socials">
+                <a href="https://www.instagram.com/lamix.drop.kg?cplk=MXQ0MW45b2ZsZXdsZA%3D%3D&utm_source=qr" target="_blank" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@lamix.drop.kg" target="_blank" title="TikTok">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Каталог товаров -->
+    <section class="catalog container" id="catalog">
+        <div class="section-title">
+            <h2>ПОПУЛЯРНЫЕ ТОВАРЫ</h2>
+            <p>Выбирай то, в чем будешь выделяться</p>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Сюда автоматически подгружаются товары из Telegram-бота -->
+        </div>
+    </section>
+
+    <!-- Контакты и соцсети внизу -->
+    <footer class="footer container" id="contacts">
+        <div class="section-title">
+            <h2>КОНТАКТЫ</h2>
+            <p>Свяжись с нами или сделай заказ</p>
+        </div>
+        <div class="footer-content">
+            <div class="footer-phone">
+                <i class="fa-solid fa-phone"></i> 
+                <a href="tel:+996555123456">+996 (555) 12-34-56</a>
+            </div>
+            <div class="footer-socials">
+                <a href="https://www.instagram.com/lamix.drop.kg?cplk=MXQ0MW45b2ZsZXdsZA%3D%3D&utm_source=qr" target="_blank" class="social-btn">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://www.tiktok.com/@lamix.drop.kg" target="_blank" class="social-btn">
+                    <i class="fa-brands fa-tiktok"></i> TikTok
+                </a>
+                <a href="https://wa.me/996555123456" target="_blank" class="social-btn whatsapp-btn">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Скрипты загрузки товаров и заказа через WhatsApp -->
+    <script>
+        // Укажи здесь свой номер WhatsApp для заказа товаров (без плюса, с кодом страны)
+        const WHATSAPP_NUMBER = "996555123456";
+
+        async function loadProducts() {
+            try {
+                let response = await fetch('products.json');
+                if (!response.ok) return;
+                let products = await response.json();
+                
+                const grid = document.getElementById('productsGrid');
+                grid.innerHTML = '';
+
+                products.forEach(item => {
+                    // Формируем текст сообщения для WhatsApp при клике на кнопку заказа
+                    let waMessage = encodeURIComponent(`Здравствуйте! Хочу заказать товар:\nБренд: ${item.brand}\nНазвание: ${item.title}\nЦена: ${item.price} сом\nРазмеры: ${item.sizes}`);
+                    let waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}`;
+
+                    grid.innerHTML += `
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="${item.photo}" alt="${item.title}">
+                                <span class="badge">NEW</span>
+                            </div>
+                            <div class="product-info">
+                                <span class="brand">${item.brand}</span>
+                                <h3 class="title">${item.title}</h3>
+                                <p class="product-details">Размеры: ${item.sizes} | Остаток: ${item.stock} шт.</p>
+                                <div class="price-row">
+                                    <span class="price">${item.price} сом</span>
+                                    <a href="${waLink}" target="_blank" class="add-to-cart" title="Заказать в WhatsApp">
+                                        <i class="fa-brands fa-whatsapp"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (err) {
+                console.log("Товары пока не добавлены через бот");
+            }
+        }
+
+        loadProducts();
+    </script>
+</body>
+</html>
