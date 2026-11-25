@@ -1,10 +1,12 @@
 [
-    {
-        "brand": "Nike",
-        "title": "Худи",
-        "price": "2500",
-        "sizes": "S, M, L, XL.",
-        "stock": "5",
-        "photo": "https://api.telegram.org/file/bot8633295438:AAEoWTSDKXBgQUychgfDodtUWvKPMnVs7MI/photos/file_0.jpg"
-    }
+  {
+    "id": 1,
+    "name": "Черные BAGGY джинсы🔥",
+    "price": 1300,
+    "sizes": [
+      "S",
+      "M"
+    ],
+    "image": "uploads/item_8021105178_AQADLh5rG9OBMEh-.jpg"
+  }
 ]
